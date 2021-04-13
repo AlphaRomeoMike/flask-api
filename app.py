@@ -49,7 +49,7 @@ class ProductSchema(ma.Schema):
 
 # init schema
 product_schema = ProductSchema()
-products_schema = ProductSchema()
+products_schema = ProductSchema(many=True)
 
 
 # create route
@@ -70,9 +70,13 @@ def add_product():
 # get all products
 @app.route('/product', methods=['GET'])
 def get_products():
+    x = ""
+    pro = ""
     all_products = Product.query.all()
     result = products_schema.dump(all_products)
-    return jsonify(result.data)
+    print(type(result))
+    print(result)
+    return jsonify(result)
 
 
 # run server
